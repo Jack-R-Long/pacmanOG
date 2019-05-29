@@ -56,6 +56,15 @@
             text-align: center;
             font-size: 18px;
         }
+        div.cherry{
+            background: url("cherry.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
     
     </style>
 </head>
@@ -77,9 +86,9 @@
         [2,0,2,1,1,1,1,1,1,2],
         [2,1,2,1,1,1,1,1,1,2],
         [2,1,2,1,1,2,1,1,1,2],
+        [2,1,2,1,1,2,1,4,1,2],
         [2,1,2,1,1,2,1,1,1,2],
-        [2,1,2,1,1,2,1,1,1,2],
-        [2,1,1,1,1,2,1,1,1,2],
+        [2,1,1,4,1,2,1,1,1,2],
         [2,2,2,2,2,2,2,2,2,2]
         ];
 
@@ -98,6 +107,9 @@
                 if (world[i][j] ==0){
                     output += "<div class='empty'></div>";
                 }
+                if (world[i][j] ==4){
+                    output += "<div class='cherry'></div>";
+                }
             }
             output += "\n</div>"
         }
@@ -112,12 +124,16 @@
         x: 1,
         y: 1 
     }
+    var direction =0;
 
     function drawPacman() {
          document.getElementById('pacman').style.top = pacman.y *20 + 'px'
          document.getElementById('pacman').style.left = pacman.x * 20 + 'px'
          world[pacman.y][pacman.x] = 0;       //eat coins 
          document.getElementById('score').innerHTML = score; 
+         if (direction==0){
+             document.getElementById('pacman').background = URL("")
+         }
 
     }
     drawPacman()
@@ -144,16 +160,12 @@
                 pacman.y++;
             }
         }
-        // if (world[ninjaman.y][ninjaman.x] == 2) {
-        //     score= score+10;
-        // }
-        // if (world[ninjaman.y][ninjaman.x] == 3) {
-        //     score= score+5;
-        // }
         if (world[pacman.y][pacman.x] == 1){
             score ++ ;
         }
-        
+        if (world[pacman.y][pacman.x] == 4){
+            score += 50 ;
+        }
         displayWorld();
         drawPacman();
 
